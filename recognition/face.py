@@ -56,7 +56,8 @@ def recognition(image_unknown, collection_of_known_people):
 # collection = []
 # collection = [make_collection("./known/Manohy.jpg")]
 # collection.append(make_collection("./known/Danielyh.jpg"))
+# collection.append(make_collection("./known/Manolo.jpg"))
 
 
-# print(recognition("./unknown/Manohy.jpg", collection))
-# print(recognition("./unknown/6.jpg", collection))
+# print(recognition("./unknown/WIN_20230411_14_36_58_Pro.jpg", collection))
+# # print(recognition("./unknown/6.jpg", collection))

@@ -6,7 +6,8 @@ from werkzeug.utils import secure_filename
 from collection import save_image_known_in_database, get_collection
 from recognition.face import make_collection, recognition
 from person import Person
-
+import base64
+import imghdr
 
 UPLOAD_FOLDER = 'recognition/known'
 UPLOAD_FOLDER_UNKNOWN = 'recognition/unknown'
@@ -59,9 +60,13 @@ def recognition_faces():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER_UNKNOWN'], filename))
         collection = get_collection()
-        face = recognition(f'{UPLOAD_FOLDER}/{filename}', collection)
+        face = recognition(f'{UPLOAD_FOLDER_UNKNOWN}/{filename}', collection)
         if face:
             result = Person.get_info_from_database(face)
+            filename = f'{UPLOAD_FOLDER}/{result[6]}'
+            with open(filename, 'rb') as f:
+                image_data = f.read()
+            mime_type = 'image/' + imghdr.what(None, h=image_data)
             return jsonify({
                 'last_name': result[0],
                 'first_name': result[1],
@@ -69,7 +74,8 @@ def recognition_faces():
                 'email': result[3],
                 'birthday': result[4],
                 'description': result[5],
-                'filename': result[6],
+                'filename': base64.b64encode(image_data).decode('utf-8'),
+                'mime_type': mime_type
                 }), 201
         else:
             return jsonify({'message': 'Cette personne n\' est pas dans la base de donnée'})
