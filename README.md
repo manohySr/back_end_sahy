@@ -5,5 +5,22 @@
 ## I did not make a dependencies file so:
 ### Install: facerecongition, flask
 ## How to run the project,
-###   1) clone the repository and install all the dependencies
+###   1) Use a sql database like: MySQL or postgreSQL
+Here are the sql script for creating the database: 
+
+              CREATE DATABASE sahy_database;
+              USE sahy_database;
+
+              CREATE TABLE person (
+                  id INT PRIMARY KEY AUTO_INCREMENT,
+                  last_name VARCHAR(255),
+                  first_name VARCHAR(255),
+                  address VARCHAR(255),
+                  email VARCHAR(255),
+                  birthday VARCHAR(10),
+                  description VARCHAR(255),
+                  photo_filename VARCHAR(255)
+              );
+
+###   2) clone the repository and install all the dependencies
 ###   3) for lanching => python main.py
