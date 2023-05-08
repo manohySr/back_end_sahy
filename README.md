@@ -23,4 +23,4 @@ Here are the sql script for creating the database:
               );
 
 ###   2) clone the repository and install all the dependencies
-###   3) for lanching => python main.py
+###   3) for running => python main.py
